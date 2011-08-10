@@ -1,7 +1,7 @@
 package org.jeroen.querydsl;
 
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.jeroen.querydsl.PathMatcher.valueOf;
+import static org.jeroen.querydsl.PathMatcher.hasValue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
@@ -19,7 +19,8 @@ public class PathMatcherTest {
         Car car = new Car();
         car.setHorsePower(123);
         
-        assertThat(car, valueOf($.horsePower, equalTo(123)));
+        assertThat(car, hasValue($.horsePower));
+        assertThat(car, hasValue($.horsePower, equalTo(123)));
     }
     
     @Test
@@ -28,14 +29,14 @@ public class PathMatcherTest {
         car.setHorsePower(123);
         
         Description mismatchDescription = new StringDescription();
-        valueOf($.horsePower, equalTo(321)).describeMismatch(car, mismatchDescription);
+        hasValue($.horsePower, equalTo(321)).describeMismatch(car, mismatchDescription);
         assertEquals("value \"car.horsePower\" was <123>", mismatchDescription.toString());
     }
     
     @Test
     public void testDescribe() {
         Description description = new StringDescription();
-        valueOf($.horsePower, equalTo(321)).describeTo(description);
+        hasValue($.horsePower, equalTo(321)).describeTo(description);
         assertEquals("valueOf(\"car.horsePower\", <321>)", description.toString());
     }
     

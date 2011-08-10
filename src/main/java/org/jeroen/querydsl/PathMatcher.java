@@ -1,5 +1,7 @@
 package org.jeroen.querydsl;
 
+import static org.hamcrest.core.IsNull.notNullValue;
+
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
@@ -30,9 +32,14 @@ public class PathMatcher<T, V> extends TypeSafeDiagnosingMatcher<T> {
         this.matcher = matcher;
         this.accessor = accessor;
     }
+    
+    @Factory
+    public static <T,P> Matcher<T> hasValue(Path<P> path) {
+        return new PathMatcher<T,P>(path, notNullValue());
+    }
   
     @Factory
-    public static <T,P> Matcher<T> valueOf(Path<P> path, Matcher<? super P> matcher) {
+    public static <T,P> Matcher<T> hasValue(Path<P> path, Matcher<? super P> matcher) {
         return new PathMatcher<T,P>(path, matcher);
     }
     
