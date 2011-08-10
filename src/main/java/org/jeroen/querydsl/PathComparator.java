@@ -22,19 +22,21 @@ public class PathComparator<T, V extends Comparable<V>> implements Comparator<T>
     @Override
     public int compare(T leftBean, T rightBean) {
         if(leftBean == rightBean) {
-            return 0;
+            return 0; // Reference to the seme object should always result in '0'
         } else if (leftBean == null) {
-            return -1;
+            return -1; // Whenever the reference varies, and left is null, right is not null
         } else if (rightBean == null) {
-            return 1;
-        } 
+            return 1; // Whenever the reference varies, and right is null, left is not null
+        } else if (leftBean.equals(rightBean)) {
+            return 0; // Equal beans should always result in '0'
+        }
         return comparePathValues(leftBean, rightBean);
     }
     
     private int comparePathValues(T leftBean, T rightBean) {
         V left = propertyAccessor.getPropertyValue(leftBean, comparingPath);
-        V right = propertyAccessor.getPropertyValue(leftBean, comparingPath);
-        return ObjectUtils.compare(left, right);
+        V right = propertyAccessor.getPropertyValue(rightBean, comparingPath);
+        return ObjectUtils.compare(left, right); // Null safe value comparison
     }
 
 }

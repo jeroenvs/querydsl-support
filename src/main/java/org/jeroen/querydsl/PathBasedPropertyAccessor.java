@@ -44,7 +44,7 @@ public class PathBasedPropertyAccessor {
     private static void checkBeanWithPathRoot(Object bean, Path<?> path) {
         Class<?> rootClass = path.getRoot().getType();
         if(! rootClass.isAssignableFrom(bean.getClass()) ) {
-            throw new IllegalArgumentException(format("Path root type '%s' does not match bean '%s'.", rootClass, bean));
+            throw new IllegalArgumentException(format("Bean is not of path root type '%s'.", rootClass.getSimpleName()));
         }
     }
     
