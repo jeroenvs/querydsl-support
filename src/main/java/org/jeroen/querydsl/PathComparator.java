@@ -18,6 +18,10 @@ public class PathComparator<T, V extends Comparable<V>> implements Comparator<T>
         this.comparingPath = comparingPath;
         this.accessor = accessor;
     }
+    
+    public static <T, V extends Comparable<V>> PathComparator<T, V> pathComparator(Path<V> comparingPath) {
+        return new PathComparator<T,V>(comparingPath);
+    }
 
     @Override
     public int compare(T leftBean, T rightBean) {

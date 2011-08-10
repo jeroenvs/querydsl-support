@@ -1,6 +1,9 @@
 package org.jeroen.querydsl;
 
+import static org.jeroen.querydsl.PathComparator.pathComparator;
 import static org.junit.Assert.assertEquals;
+
+import java.util.Comparator;
 
 import org.jeroen.querydsl.domain.Car;
 import org.jeroen.querydsl.domain.QCar;
@@ -8,11 +11,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class PathComparatorTest {
-    private PathComparator<Car, Integer> comparator;
+    private Comparator<Car> comparator;
     
     @Before
     public void setUpComparator() {
-        comparator = new PathComparator<Car, Integer>(QCar.car.horsePower);
+        comparator = pathComparator(QCar.car.horsePower);
     }
 
     @Test
