@@ -3,7 +3,7 @@ QCar $ = QCar.car;
 Matcher
 
 Car car = new Car().setHorsePower(123);
-assertThat(car, PathMatcher.valueOf($.horsePower, equalTo(123)));
+assertThat(car, valueOf($.horsePower, equalTo(123)));
 
 Comparator
 
