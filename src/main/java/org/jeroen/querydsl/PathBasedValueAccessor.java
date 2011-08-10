@@ -4,6 +4,12 @@ import static java.lang.String.format;
 
 import com.mysema.query.types.Path;
 
+/**
+ * Access the current value of a bean, using paths.
+ * 
+ * @author Jeroen van Schagen
+ * @since 12-08-2011
+ */
 public class PathBasedValueAccessor {
     private final PropertyAccessor propertyAccessor;
     

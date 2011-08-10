@@ -8,24 +8,24 @@ import org.hamcrest.TypeSafeDiagnosingMatcher;
 import com.mysema.query.types.Path;
 
 /**
- * Matches the current value of a specific path.
+ * Matches based on the current value of a path.
  * 
  * @author Jeroen van Schagen
  * @since 30-06-2011
  *
  * @param <T> type of the path root
- * @param <P> type of value being matched
+ * @param <V> type of value being matched
  */
-public class PathMatcher<T,P> extends TypeSafeDiagnosingMatcher<T> {   
+public class PathMatcher<T, V> extends TypeSafeDiagnosingMatcher<T> {   
     private final PathBasedValueAccessor accessor;
-    private final Matcher<? super P> matcher;
-    private final Path<P> path;
+    private final Matcher<? super V> matcher;
+    private final Path<V> path;
     
-    public PathMatcher(Path<P> path, Matcher<? super P> matcher) {
+    public PathMatcher(Path<V> path, Matcher<? super V> matcher) {
         this(path, matcher, new PathBasedValueAccessor());
     }
     
-    public PathMatcher(Path<P> path, Matcher<? super P> matcher, PathBasedValueAccessor accessor) {
+    public PathMatcher(Path<V> path, Matcher<? super V> matcher, PathBasedValueAccessor accessor) {
         this.path = path;
         this.matcher = matcher;
         this.accessor = accessor;
@@ -38,7 +38,7 @@ public class PathMatcher<T,P> extends TypeSafeDiagnosingMatcher<T> {
     
     @Override
     protected boolean matchesSafely(T bean, Description mismatchDescription) {
-        P value = accessor.getPathValue(bean, path);
+        V value = accessor.getPathValue(bean, path);
         boolean valueMatches = matcher.matches(value);
         if (!valueMatches) {
             mismatchDescription.appendText("value \"" + path.toString() + "\" ");
