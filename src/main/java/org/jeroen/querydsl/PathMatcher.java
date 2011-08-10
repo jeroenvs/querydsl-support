@@ -1,7 +1,5 @@
 package org.jeroen.querydsl;
 
-import static org.hamcrest.core.IsEqual.equalTo;
-
 import org.hamcrest.Description;
 import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
@@ -36,11 +34,6 @@ public class PathMatcher<T,P> extends TypeSafeDiagnosingMatcher<T> {
     @Factory
     public static <T,P> Matcher<T> valueOf(Path<P> path, Matcher<? super P> matcher) {
         return new PathMatcher<T,P>(path, matcher);
-    }
-    
-    @Factory
-    public static <T,P> Matcher<T> valueOf(Path<P> path, P expected) {
-        return valueOf(path, equalTo(expected));
     }
     
     @Override

@@ -6,6 +6,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 public class Car {
     private String model;
     private Integer horsePower;
+    private Person owner;
     
     public String getModel() {
         return model;
@@ -21,6 +22,14 @@ public class Car {
     
     public void setHorsePower(Integer horsePower) {
         this.horsePower = horsePower;
+    }
+    
+    public Person getOwner() {
+        return owner;
+    }
+    
+    public void setOwner(Person owner) {
+        this.owner = owner;
     }
     
     @Override
