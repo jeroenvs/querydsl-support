@@ -21,19 +21,20 @@ public class PathMatcher<T,P> extends TypeSafeDiagnosingMatcher<T> {
     private final Matcher<? super P> matcher;
     private final Path<P> path;
     
-    public PathMatcher(Path<P> valuePath, Matcher<? super P> valueMatcher) {
-        this(valuePath, valueMatcher, new PathBasedValueAccessor());
-    }
-    
-    public PathMatcher(Path<P> path, Matcher<? super P> matcher, PathBasedValueAccessor accessor) {
+    private PathMatcher(Path<P> path, Matcher<? super P> matcher, PathBasedValueAccessor accessor) {
         this.path = path;
         this.matcher = matcher;
         this.accessor = accessor;
     }
     
     @Factory
+    public static <T,P> Matcher<T> valueOf(Path<P> path, Matcher<? super P> matcher, PathBasedValueAccessor accessor) {
+        return new PathMatcher<T,P>(path, matcher, accessor);
+    }
+    
+    @Factory
     public static <T,P> Matcher<T> valueOf(Path<P> path, Matcher<? super P> matcher) {
-        return new PathMatcher<T,P>(path, matcher);
+        return valueOf(path, matcher, new PathBasedValueAccessor());
     }
     
     @Override
