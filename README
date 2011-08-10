@@ -1,1 +1,13 @@
-Type safe property navigation using QueryDSL
+QCar $ = QCar.car;
+
+Matcher
+
+Car car = new Car().setHorsePower(123);
+assertThat(car, PathMatcher.valueOf($.horsePower, equalTo(123)));
+
+Comparator
+
+Car car = new Car().setHorsePower(50);
+
+Car betterCar = new Car().setHorsePower(150);
+assertEquals(-1, pathComparator($.horsePower).compare(car, betterCar));
