@@ -10,3 +10,7 @@ Comparator
 Car car = new Car().setHorsePower(50);
 Car betterCar = new Car().setHorsePower(150);
 assertEquals(-1, pathComparator($.horsePower).compare(car, betterCar));
+
+Future ideas:
+ - Type safe sort definition, e.g. new MutableSortDefinition($.horsePower,true,true)
+ - Type safe bean wrapper, e.g. getPropertyDescriptor($.horsePower)
