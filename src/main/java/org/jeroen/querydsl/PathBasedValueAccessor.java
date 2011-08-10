@@ -1,6 +1,7 @@
 package org.jeroen.querydsl;
 
 import static java.lang.String.format;
+import static org.jeroen.querydsl.Paths.expressionOf;
 
 import com.mysema.query.types.Path;
 
@@ -8,7 +9,7 @@ import com.mysema.query.types.Path;
  * Access the current value of a bean, using paths.
  * 
  * @author Jeroen van Schagen
- * @since 12-08-2011
+ * @since 10-08-2011
  */
 public class PathBasedValueAccessor {
     private final PropertyAccessor propertyAccessor;
@@ -33,7 +34,8 @@ public class PathBasedValueAccessor {
         if(bean != null) {
             switch(path.getMetadata().getPathType()) {
             case PROPERTY:
-                result = propertyAccessor.getPropertyValue(bean, expressionOf(path));
+                String propertyName = expressionOf(path).toString();
+                result = propertyAccessor.getPropertyValue(bean, propertyName);
                 break;
             case VARIABLE:
                 result = bean;
@@ -41,10 +43,6 @@ public class PathBasedValueAccessor {
             }
         }
         return (T) result;
-    }
-    
-    private static String expressionOf(Path<?> path) {
-        return path.getMetadata().getExpression().toString();
     }
     
     private static void checkBeanWithPathRoot(Object bean, Path<?> path) {
