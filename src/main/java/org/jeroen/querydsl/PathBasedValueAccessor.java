@@ -1,8 +1,8 @@
 package org.jeroen.querydsl;
 
 import static java.lang.String.format;
-import static org.jeroen.querydsl.Paths.expressionOf;
 
+import com.mysema.query.types.Expression;
 import com.mysema.query.types.Path;
 
 /**
@@ -43,6 +43,10 @@ public class PathBasedValueAccessor {
             }
         }
         return (T) result;
+    }
+    
+    private static Expression<?> expressionOf(Path<?> path) {
+        return path.getMetadata().getExpression();
     }
     
     private static void checkBeanWithPathRoot(Object bean, Path<?> path) {
