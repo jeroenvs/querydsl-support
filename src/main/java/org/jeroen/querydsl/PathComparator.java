@@ -7,16 +7,16 @@ import org.apache.commons.lang3.ObjectUtils;
 import com.mysema.query.types.Path;
 
 public class PathComparator<T, V extends Comparable<V>> implements Comparator<T> {
+    private final PathBasedValueAccessor accessor;
     private final Path<V> comparingPath;
-    private final PathBasedPropertyAccessor propertyAccessor;
     
     public PathComparator(Path<V> comparingPath) {
-        this(comparingPath, new PathBasedPropertyAccessor());
+        this(comparingPath, new PathBasedValueAccessor());
     }
     
-    public PathComparator(Path<V> comparingPath, PathBasedPropertyAccessor propertyAccessor) {
+    public PathComparator(Path<V> comparingPath, PathBasedValueAccessor accessor) {
         this.comparingPath = comparingPath;
-        this.propertyAccessor = propertyAccessor;
+        this.accessor = accessor;
     }
 
     @Override
@@ -34,8 +34,8 @@ public class PathComparator<T, V extends Comparable<V>> implements Comparator<T>
     }
     
     private int comparePathValues(T leftBean, T rightBean) {
-        V left = propertyAccessor.getPropertyValue(leftBean, comparingPath);
-        V right = propertyAccessor.getPropertyValue(rightBean, comparingPath);
+        V left = accessor.getPathValue(leftBean, comparingPath);
+        V right = accessor.getPathValue(rightBean, comparingPath);
         return ObjectUtils.compare(left, right); // Null safe value comparison
     }
 

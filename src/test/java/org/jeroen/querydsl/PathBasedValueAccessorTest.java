@@ -8,14 +8,14 @@ import org.jeroen.querydsl.domain.QCar;
 import org.junit.Before;
 import org.junit.Test;
 
-public class PathBasedPropertyAccessorTest {
+public class PathBasedValueAccessorTest {
     private static final QCar $ = QCar.car;
     
-    private PathBasedPropertyAccessor propertyAccessor;
+    private PathBasedValueAccessor accessor;
 
     @Before
     public void setUpAccessor() {
-        propertyAccessor = new PathBasedPropertyAccessor();
+        accessor = new PathBasedValueAccessor();
     }
     
     private Car car;
@@ -29,14 +29,14 @@ public class PathBasedPropertyAccessorTest {
     
     @Test
     public void testDirectProperty() {
-        Integer horsePower = propertyAccessor.getPropertyValue(car, $.horsePower);
+        Integer horsePower = accessor.getPathValue(car, $.horsePower);
         assertEquals(Integer.valueOf(623), horsePower);
     }
     
     @Test
     public void testInvalidBean() {
         try {
-            propertyAccessor.getPropertyValue("string", $.horsePower);
+            accessor.getPathValue("string", $.horsePower);
             fail("Expected an illegal argument exception because bean type is invalid.");
         } catch(IllegalArgumentException e) {
             assertEquals("Bean is not of path root type 'Car'.", e.getMessage());

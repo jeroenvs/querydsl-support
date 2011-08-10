@@ -4,23 +4,23 @@ import static java.lang.String.format;
 
 import com.mysema.query.types.Path;
 
-public class PathBasedPropertyAccessor {
+public class PathBasedValueAccessor {
     private final PropertyAccessor propertyAccessor;
     
-    public PathBasedPropertyAccessor() {
+    public PathBasedValueAccessor() {
         this(new SimplePropertyAccessor());
     }
     
-    public PathBasedPropertyAccessor(PropertyAccessor propertyAccessor) {
+    public PathBasedValueAccessor(PropertyAccessor propertyAccessor) {
         this.propertyAccessor = propertyAccessor;
     }
 
-    public <T> T getPropertyValue(Object bean, Path<T> path) {
+    public <T> T getPathValue(Object bean, Path<T> path) {
         checkBeanWithPathRoot(bean, path);
         
         // Retrieve property container recursively
         if(!path.getMetadata().isRoot()) {
-            bean = getPropertyValue(bean, path.getMetadata().getParent());
+            bean = getPathValue(bean, path.getMetadata().getParent());
         }
 
         Object result = null;
