@@ -8,6 +8,5 @@ assertThat(car, valueOf($.horsePower, equalTo(123)));
 Comparator
 
 Car car = new Car().setHorsePower(50);
-
 Car betterCar = new Car().setHorsePower(150);
 assertEquals(-1, pathComparator($.horsePower).compare(car, betterCar));
