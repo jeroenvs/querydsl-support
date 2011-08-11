@@ -14,3 +14,4 @@ assertEquals(-1, pathComparator($.horsePower).compare(car, betterCar));
 Future ideas:
  - Sort definition: new MutableSortDefinition($.horsePower, true, true)
  - Bean wrapper: getPropertyDescriptor($.horsePower)
+ - Sort builder: asc($.horsePower, $.model) -> Sort (Spring Data JPA)
